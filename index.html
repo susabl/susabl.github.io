@@ -1,93 +1,410 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Think Green, Be Clean!</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Environmental Sustainability</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #232533;
+        overflow-x: hidden;
+        height: 100vh;
+        font-family: "urbanist", sans-serif;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      input {
+        display: none;
+      }
+
+      .container {
+        width: 100%;
+        height: 100%;
+        max-width: 600px;
+        max-height: 600px;
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        transform-style: preserve-3d;
+        flex-direction: column;
+        margin-bottom: 100px;
+      }
+
+      .cards {
+        position: relative;
+        height: 500px;
+        width: 430px;
+        margin-bottom: 20px;
+        perspective: 1000px;
+        transform-style: preserve-3d;
+      }
+
+      .cards label {
+        position: absolute;
+        width: 430px;
+        left: 0;
+        right: 0;
+        margin: auto;
+        cursor: pointer;
+        transition: transform 0.55s ease;
+      }
+
+      .cards .card {
+        position: relative;
+        height: 100%;
+        background-color: #323444;
+        border-radius: 10px;
+        padding: 30px 35px;
+      }
+
+      .cards .image {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .cards .image img {
+        border-radius: 5px;
+        box-shadow: 15px 15px 40px rgba(0, 0, 0, 50%);
+        margin-top: 23px;
+        width: 86%;
+        height: 220px;
+        object-fit: cover;
+        transition: all 0.7s;
+      }
+
+      .cards .image img:hover {
+        transform: scale(1.05);
+      }
+
+      .cards .image .dots {
+        text-align: center;
+      }
+
+      .dots div {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+      }
+
+      .dots div:nth-child(1) {
+        background-color: var(--current-color1);
+      }
+
+      .dots div:nth-child(2) {
+        background-color: #5b85f9;
+      }
+
+      .dots div:nth-child(3) {
+        background-color: #000;
+      }
+
+      .card .infos {
+        display: block;
+        text-align: end;
+        padding-top: 60px;
+      }
+
+      .card .infos span {
+        display: block;
+      }
+
+      .infos .name {
+        font-size: 30px;
+        color: var(--current-color1);
+        letter-spacing: 8px;
+        margin-bottom: 20px;
+        padding-left: 25%;
+        transition: all 0.6s ease;
+      }
+
+      .card .lorem {
+        font-size: 15.5px;
+        color: #eceaed;
+        letter-spacing: 3px;
+      }
+
+      .card .btn-details {
+        width: 100%;
+        height: 60px;
+        margin: 30px auto;
+        border-radius: 5px;
+        background-color: var(--current-color1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 25px;
+        letter-spacing: 10px;
+        font-weight: 700;
+        transition: all 0.7s ease;
+      }
+
+      .card .btn-details:hover {
+        transform: scale(1.09);
+      }
+
+      .card .actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 20px;
+      }
+
+      .actions i {
+        font-size: all 0.7s ease;
+        color: var(--currente-color2);
+      }
+
+      .actions:hover i {
+        transform: scale(1.3);
+      }
+
+      #s1:checked ~ .cards #slide4,
+      #s2:checked ~ .cards #slide5,
+      #s3:checked ~ .cards #slide1,
+      #s4:checked ~ .cards #slide2,
+      #s5:checked ~ .cards #slide3 {
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 45%);
+        transform: translate3d(-70%, 0, -220px);
+        --current-color1: #eceaed;
+        --currente-color2: #404457;
+      }
+
+      #s1:checked ~ .cards #slide5,
+      #s2:checked ~ .cards #slide1,
+      #s3:checked ~ .cards #slide2,
+      #s4:checked ~ .cards #slide3,
+      #s5:checked ~ .cards #slide4 {
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 45%);
+        transform: translate3d(-35%, 0, -120px);
+        --current-color1: #eceaed;
+        --currente-color2: #404457;
+      }
+
+      #s1:checked ~ .cards #slide1,
+      #s2:checked ~ .cards #slide2,
+      #s3:checked ~ .cards #slide3,
+      #s4:checked ~ .cards #slide4,
+      #s5:checked ~ .cards #slide5 {
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 50%);
+        transform: translate3d(0, 0, 0);
+        --current-color1: #fad00c;
+        --currente-color2: #eceaed;
+      }
+
+      #s1:checked ~ .cards #slide2,
+      #s2:checked ~ .cards #slide3,
+      #s3:checked ~ .cards #slide4,
+      #s4:checked ~ .cards #slide5,
+      #s5:checked ~ .cards #slide1 {
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 45%);
+        transform: translate3d(35%, 0, -120px);
+        --current-color1: #eceaed;
+        --currente-color2: #404457;
+      }
+
+      #s1:checked ~ .cards #slide3,
+      #s2:checked ~ .cards #slide4,
+      #s3:checked ~ .cards #slide5,
+      #s4:checked ~ .cards #slide1,
+      #s5:checked ~ .cards #slide2 {
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 45%);
+        transform: translate3d(70%, 0, -220px);
+        --current-color1: #eceaed;
+        --currente-color2: #404457;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
-    <h1 style="text-align: center;color: blue;">Think Green, Be Clean!</h1>
+    <div class="container">
+      <input type="radio" name="slider" id="s1" checked />
+      <input type="radio" name="slider" id="s2" />
+      <input type="radio" name="slider" id="s3" />
+      <input type="radio" name="slider" id="s4" />
+      <input type="radio" name="slider" id="s5" />
 
-<!--
-    <div class="container text-center">
-      <div class="row">
-        <div class="col">
-          <a href="https://docs.google.com/presentation/d/1P7o95T512e8b26adnBjzvSeZb4AO8ErL/edit?usp=drive_link&ouid=104816792002564059179&rtpof=true&sd=true"> <button type="button" class="btn btn-primary">Environmental KPI 2024</button></a>
-        </div>
-        <div class="col">
-          <a href="https://drive.google.com/file/d/1cQ_DW6uX5W3TIEnRt5_Dlk92JaUECzWb/view?usp=drive_link"><button type="button" class="btn btn-secondary">Environmental Targets</button></a>
-        </div>
-        <div class="col">
-          <a href="https://1drv.ms/p/s!AhjpmN52i6AycVtz3WE7YGUooPY?e=b61cOD"> <button type="button" class="btn btn-success">Environmental Initiatives</button></a>
-        </div>
-        <div class="col">
-          <a href="https://1drv.ms/f/s!AhjpmN52i6Aybd1Zr6Pc1N7ItP4?e=jhoW8W"><button type="button" class="btn btn-danger">Environmental Programs</button></a>
-        </div>
-        <div class="col">
-          <a href="https://1drv.ms/f/s!AhjpmN52i6Aycn5-OECNkHtHBJk?e=6JOi39"> <button type="button" class="btn btn-warning">Environmental Training</button></a>
-        </div>
-        <div class="col">
-          <a href="https://www.crystalgroup.com"> <button type="button" class="btn btn-primary">Crystal International Group Limited</button></a>
-        </div>
-        <div class="col">
-          <a href="https://www.crystalnetzero2050.com/"> <button type="button" class="btn btn-secondary">Crystal Net Zero 2050</button></a>
-        </div>
-        <div class="col">
-          <a href="https://forms.gle/E4BC6r4QCfHPq23C9"> <button type="button" class="btn btn-info">Join Earth Hour 2024 Quiz Program</button></a>
-        </div>
-  
+      <div class="cards">
+        <label for="s1" id="slide1">
+          <div class="card">
+            <div class="image">
+              <img src="./images/EKPI.png" alt="book1" />
+              <div class="dots">
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+
+            <div class="infos">
+              <span class="name"> EKPI </span>
+              <span class="lorem">
+                Environmenal Key Performance Indicator (EKPI) reports demonstrate the facity performance in perspective of GHG Emission & Productivity.
+              </span>
+
+              <a href="https://app.powerbi.com/groups/me/reports/7f413f43-682d-4d4e-8199-ff635f87b41a/ReportSection40043450567375e2de30?ctid=19fb5d27-b629-4056-87d0-8a8a39a82762&experience=power-bi" class="btn-details"> EKPI Dashboard </a>
+
+              <div class="actions">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <i class="fa-regular fa-heart"></i>
+                <i class="fa-regular fa-bookmark"></i>
+                <i class="fa-solid fa-share-nodes"></i>
+              </div>
+            </div>
+          </div>
+        </label>
+
+        <label for="s2" id="slide2">
+          <div class="card">
+            <div class="image">
+              <img src="./images/BHive.png" alt="book2" />
+              <div class="dots">
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+
+            <div class="infos">
+              <span class="name"> BHive </span>
+              <span class="lorem">
+                BHive InCheck: A cutting-edge background screening platform offering comprehensive, efficient, and reliable screening solutions for chemical management.
+              </span>
+
+              <a href="https://login.thebhive.net/dashboard" class="btn-details">BHive Portal</a>
+
+              <div class="actions">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <i class="fa-regular fa-heart"></i>
+                <i class="fa-regular fa-bookmark"></i>
+                <i class="fa-solid fa-share-nodes"></i>
+              </div>
+            </div>
+          </div>
+        </label>
+
+        <label for="s3" id="slide3">
+          <div class="card">
+            <div class="image">
+              <img src="./images/ZDHC.png" alt="book3" />
+              <div class="dots">
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+
+            <div class="infos">
+              <span class="name"> ZDHC </span>
+              <span class="lorem">
+                ZDHC: Zero Discharge of Hazardous Chemicals is a global initiative promoting sustainable chemical management in the textile, leather, and footwear industries.
+              </span>
+
+              <a href="https://www.my-aip.com/ZDHCGateway/Login.aspx" class="btn-details"> ZDHC Portal </a>
+
+              <div class="actions">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <i class="fa-regular fa-heart"></i>
+                <i class="fa-regular fa-bookmark"></i>
+                <i class="fa-solid fa-share-nodes"></i>
+              </div>
+            </div>
+          </div>
+        </label>
+
+        <label for="s4" id="slide4">
+          <div class="card">
+            <div class="image">
+              <img src="./images/Enablon.png" alt="book4" />
+              <div class="dots">
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+
+            <div class="infos">
+              <span class="name"> Enablon </span>
+              <span class="lorem">
+                PUMA Enablon: An integrated software platform enabling PUMA to manage environmental, health, safety, and sustainability performance across its operations.
+              </span>
+
+              <a href="https://puma.enablon.com/puma/go.aspx?login=1" class="btn-details">Enablon Portal</a>
+
+              <div class="actions">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <i class="fa-regular fa-heart"></i>
+                <i class="fa-regular fa-bookmark"></i>
+                <i class="fa-solid fa-share-nodes"></i>
+              </div>
+            </div>
+          </div>
+        </label>
+
+        <label for="s5" id="slide5">
+          <div class="card">
+            <div class="image">
+              <img src="./images/Higg FEM.png" alt="book5" />
+              <div class="dots">
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+
+            <div class="infos">
+              <span class="name"> Higg FEM </span>
+              <span class="lorem">
+                HIGG FEM: The Higg Facility Environmental Module helps facilities measure and manage their environmental performance, enhancing sustainability in the supply chain.
+              </span>
+
+              <a href="https://app.worldly.io/5dd4d5a54f39920009e74046/dash" class="btn-details"> HIGG FEM Portal </a>
+
+              <div class="actions">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <i class="fa-regular fa-heart"></i>
+                <i class="fa-regular fa-bookmark"></i>
+                <i class="fa-solid fa-share-nodes"></i>
+              </div>
+            </div>
+          </div>
+        </label>
       </div>
     </div>
 
--->
-
-            <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="ABL Photo.png" class="d-block w-100" alt="ABL Photo.png">
-    </div>
-    <div class="carousel-item">
-      <img src="Crystal Net Zero 2050.jpg" class="d-block w-100" alt="Crystal Net Zero 2050.jpg">
-    </div>
-    <div class="carousel-item">
-      <img src="1.jpg" class="d-block w-100" alt="1.jpg">
-    </div>
-    <div class="carousel-item">
-      <img src="2.jpg" class="d-block w-100" alt="2.jpg">
-    </div>
-    <div class="carousel-item">
-      <img src="3.jpg" class="d-block w-100" alt="3.jpg">
-    </div>
-    <div class="carousel-item">
-      <img src="4.jpg" class="d-block w-100" alt="4.jpg">
-    </div>
-    <div class="carousel-item">
-      <img src="5.jpg" class="d-block w-100" alt="5.jpg">
-    </div>
-    <div class="carousel-item">
-      <img src="Energy Saving Sign (1).png" class="d-block w-100" alt="Energy Saving Sign (1).png">
-    </div>
-    <div class="carousel-item">
-      <img src="Energy Saving Sign (2).png" class="d-block w-100" alt="Energy Saving Sign (2).png">
-    </div>
-    <div class="carousel-item">
-      <img src="Energy Saving Sign (3).png" class="d-block w-100" alt="Energy Saving Sign (3).png">
-    </div>
-    <div class="carousel-item">
-      <img src="Energy Saving Sign (4).png" class="d-block w-100" alt="Energy Saving Sign (4).png">
-    </div>
-    <div class="carousel-item">
-      <img src="Energy Saving Sign (5).png" class="d-block w-100" alt="Energy Saving Sign (5).png">
-    </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+      integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
